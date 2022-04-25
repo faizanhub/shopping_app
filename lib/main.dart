@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/routes.dart';
+import 'package:shopping_app/ui/screens/checkout_screen.dart';
 import 'package:shopping_app/ui/screens/home_screen.dart';
 import 'package:shopping_app/ui/theme.dart';
 
