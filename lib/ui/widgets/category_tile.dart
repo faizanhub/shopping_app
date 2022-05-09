@@ -5,10 +5,12 @@ import 'package:shopping_app/constants/text_styles.dart';
 class CategoryTile extends StatelessWidget {
   final Function(String?)? onChanged;
   final String selectedCategory;
+  final List<String> listOfCategories;
 
   CategoryTile({
     required this.onChanged,
     this.selectedCategory = '',
+    required this.listOfCategories,
   });
 
   @override
@@ -30,13 +32,20 @@ class CategoryTile extends StatelessWidget {
             color: Colors.black,
           ),
           onChanged: onChanged,
-          items: <String>['All', 'One', 'Two', 'Free', 'Four']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
+          items: [
+            DropdownMenuItem(
+              child: Text(AppStrings.all),
+              value: AppStrings.all,
+            ),
+            ...listOfCategories
+                .map(
+                  (category) => DropdownMenuItem<String>(
+                    child: Text(category),
+                    value: category,
+                  ),
+                )
+                .toList()
+          ],
           isExpanded: true,
         ),
       ),

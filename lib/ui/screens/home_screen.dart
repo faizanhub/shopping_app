@@ -1,5 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:shopping_app/constants/app_strings.dart';
+import 'package:shopping_app/core/models/products.dart';
+import 'package:shopping_app/core/services/shopping_services.dart';
 import 'package:shopping_app/ui/screens/checkout_screen.dart';
 import 'package:shopping_app/ui/widgets/bill_tile.dart';
 import 'package:shopping_app/ui/widgets/category_tile.dart';
@@ -16,6 +19,55 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String categoryValue = AppStrings.all;
+  ShoppingServices _shoppingServices = ShoppingServices();
+
+  List<Product>? listOfAllProducts;
+  List<String> listOfAllCategories = [];
+  List<Product> selectedItemsList = [];
+
+  String category = '';
+  // int cart = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProducts(category);
+    getAllCategories();
+  }
+
+  fetchProducts(String category) {
+    _shoppingServices.fetchProducts(category).then((listOfProduct) {
+      setState(() {
+        listOfAllProducts = listOfProduct;
+      });
+    });
+  }
+
+  getAllCategories() {
+    _shoppingServices.getAllCategories().then((listOfCategories) {
+      setState(() {
+        listOfAllCategories = listOfCategories;
+      });
+    });
+  }
+
+  addToCart(Product product) {
+    setState(() {
+      selectedItemsList.add(product);
+    });
+  }
+
+  removeFromCart(int id) {
+    setState(() {
+      selectedItemsList.removeWhere((element) => element.id == id);
+    });
+  }
+
+  resetCart() {
+    setState(() {
+      selectedItemsList = [];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,29 +75,52 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('${AppStrings.appTitle}'),
         centerTitle: true,
+        actions: [
+          Badge(
+            position: BadgePosition.topEnd(top: 2, end: 2),
+            badgeContent: Text('${selectedItemsList.length}'),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, CheckoutScreen.routeName,
+                    arguments: [selectedItemsList, removeFromCart, resetCart]);
+              },
+              icon: Icon(
+                Icons.shopping_cart_outlined,
+              ),
+            ),
+          )
+        ],
 
         ///appbar with cart icon
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, CheckoutScreen.routeName);
-        },
-        child: Icon(Icons.add),
       ),
       body: Column(
         children: [
           /// Category  Tile
           CategoryTile(
             selectedCategory: categoryValue,
+            listOfCategories: listOfAllCategories,
             onChanged: (newValue) {
               setState(() {
                 categoryValue = newValue!;
+
+                listOfAllProducts = null;
+                fetchProducts(categoryValue);
               });
             },
           ),
 
           /// Products ListView
-          ProductsListView(),
+
+          listOfAllProducts != null
+              ? ProductsListView(
+                  listOfProducts: listOfAllProducts!,
+                  addToCart: addToCart,
+                )
+              : Expanded(
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                ),
 
           /// Bill Tile
           BillTile(),

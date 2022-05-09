@@ -1,26 +1,42 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_app/core/models/products.dart';
 
 class ProductsTile extends StatelessWidget {
-  bool removeIcon;
+  final bool removeIcon;
+  final Product product;
+  final void Function()? onTrailingPress;
 
-  ProductsTile({this.removeIcon = false});
+  ProductsTile({
+    this.removeIcon = false,
+    required this.product,
+    required this.onTrailingPress,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: FlutterLogo(size: 40),
-      horizontalTitleGap: 35,
-      title: Text(
-        'Lorem Ipsum is simply dummy text of the printing and typesetting industry. , ',
-        textAlign: TextAlign.start,
-      ),
-      subtitle: Text(
-        'Lorem Ipasdfasdfasdfasdfuse',
-      ),
-      trailing: Icon(
-        removeIcon
-            ? Icons.remove_shopping_cart_outlined
-            : Icons.add_shopping_cart_outlined,
+    return Card(
+      elevation: 2,
+      child: ListTile(
+        leading: Image.network(
+          '${product.image}',
+          fit: BoxFit.fill,
+          width: 80,
+          height: 70,
+        ),
+        horizontalTitleGap: 35,
+        title: Text(
+          '${product.title}',
+          textAlign: TextAlign.start,
+        ),
+        subtitle: Text(
+          '${product.category}',
+        ),
+        trailing: IconButton(
+          onPressed: onTrailingPress,
+          icon: removeIcon
+              ? Icon(Icons.remove_shopping_cart_outlined)
+              : Icon(Icons.add_shopping_cart_outlined),
+        ),
       ),
     );
   }

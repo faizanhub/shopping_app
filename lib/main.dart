@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Shopping App',
+      debugShowCheckedModeBanner: false,
       theme: MyTheme.theme,
       onGenerateRoute: MyRoutes.onGenerateRoute,
       initialRoute: HomeScreen.routeName,
