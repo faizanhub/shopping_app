@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/constants/app_strings.dart';
 import 'package:shopping_app/core/models/products.dart';
+import 'package:shopping_app/core/utils/alert_dialog.dart';
+import 'package:shopping_app/ui/screens/home_screen.dart';
 import 'package:shopping_app/ui/widgets/bill_tile.dart';
 import 'package:shopping_app/ui/widgets/products_listview.dart';
 
@@ -21,6 +23,20 @@ class CheckoutScreen extends StatefulWidget {
 }
 
 class _CheckoutScreenState extends State<CheckoutScreen> {
+  double totalBill = 0.0;
+
+  handleCheckoutButton() {
+    showAlertDialog(
+      context,
+      'Checkout',
+      'Thank you for Shopping',
+      onPressOk: () {
+        widget.resetCart();
+        Navigator.pushNamed(context, HomeScreen.routeName);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +46,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       body: Column(
         children: [
           ///Bill Tile
-          BillTile(),
+          BillTile(
+            selectedProducts: widget.selectedItemsList,
+          ),
 
           ///Cart Products ListView
           ProductsListView(
@@ -45,20 +63,24 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
 
           SizedBox(height: 10),
 
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-            child: ElevatedButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                    Theme.of(context).appBarTheme.backgroundColor),
-                minimumSize: MaterialStateProperty.all(Size(40, 40)),
-              ),
-              onPressed: () {},
-              child: Text('Checkout'),
-            ),
-          ),
-
           ///Checkout Button
+          widget.selectedItemsList.isNotEmpty
+              ? SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          Theme.of(context).appBarTheme.backgroundColor),
+                      minimumSize: MaterialStateProperty.all(Size(40, 40)),
+                    ),
+                    onPressed: handleCheckoutButton,
+                    child: Text(
+                      'Checkout',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                )
+              : SizedBox(),
         ],
       ),
     );

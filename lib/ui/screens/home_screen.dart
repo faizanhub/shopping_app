@@ -25,7 +25,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<String> listOfAllCategories = [];
   List<Product> selectedItemsList = [];
 
+  double totalBill = 0.0;
+
   String category = '';
+
   // int cart = 0;
 
   @override
@@ -123,7 +126,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
 
           /// Bill Tile
-          BillTile(),
+          BillTile(
+            selectedProducts: selectedItemsList,
+          ),
         ],
       ),
     );

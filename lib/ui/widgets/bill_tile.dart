@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app/constants/app_strings.dart';
 import 'package:shopping_app/constants/text_styles.dart';
+import 'package:shopping_app/core/models/products.dart';
 
 class BillTile extends StatelessWidget {
-  final double totalBill;
+  double totalBill = 0;
+  final List<Product> selectedProducts;
 
-  BillTile({this.totalBill = 235.23});
+  BillTile({required this.selectedProducts});
 
   @override
   Widget build(BuildContext context) {
+    if (selectedProducts.isNotEmpty) {
+      for (var value in selectedProducts) {
+        totalBill += value.price!;
+      }
+    }
+
     return Container(
       color: Theme.of(context).primaryColor,
       child: ListTile(
