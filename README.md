@@ -1,6 +1,6 @@
 # shopping_app
 
-A new Flutter project.
+A simple shopping app developed without using any state management technique to know why we specifically need state management.
 
 ## App Screenshots:
 
