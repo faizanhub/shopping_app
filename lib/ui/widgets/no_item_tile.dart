@@ -7,9 +7,9 @@ class NoItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Container(
+      child: SizedBox(
         height: MediaQuery.of(context).size.height * .30,
-        child: Text('No Products Selected', style: categoryTextStyle),
+        child: const Text('No Products Selected', style: categoryTextStyle),
       ),
     );
   }

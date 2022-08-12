@@ -28,14 +28,14 @@ class Product {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['title'] = this.title;
-    data['price'] = this.price;
-    data['description'] = this.description;
-    data['category'] = this.category;
-    data['image'] = this.image;
-    if (this.rating != null) {
-      data['rating'] = this.rating!.toJson();
+    data['id'] = id;
+    data['title'] = title;
+    data['price'] = price;
+    data['description'] = description;
+    data['category'] = category;
+    data['image'] = image;
+    if (rating != null) {
+      data['rating'] = rating!.toJson();
     }
     return data;
   }
@@ -54,8 +54,8 @@ class Rating {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['rate'] = this.rate;
-    data['count'] = this.count;
+    data['rate'] = rate;
+    data['count'] = count;
     return data;
   }
 }

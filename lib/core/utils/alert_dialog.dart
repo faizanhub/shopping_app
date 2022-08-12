@@ -11,7 +11,7 @@ void showAlertDialog(BuildContext context, String title, desc,
             child: Text(desc),
           ),
           actions: [
-            TextButton(onPressed: onPressOk, child: Text('Ok')),
+            TextButton(onPressed: onPressOk, child: const Text('Ok')),
           ],
         );
       });

@@ -41,7 +41,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppStrings.checkout),
+        title: const Text(AppStrings.checkout),
       ),
       body: Column(
         children: [
@@ -61,7 +61,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             },
           ),
 
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
 
           ///Checkout Button
           widget.selectedItemsList.isNotEmpty
@@ -71,16 +71,17 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
                           Theme.of(context).appBarTheme.backgroundColor),
-                      minimumSize: MaterialStateProperty.all(Size(40, 40)),
+                      minimumSize:
+                          MaterialStateProperty.all(const Size(40, 40)),
                     ),
                     onPressed: handleCheckoutButton,
-                    child: Text(
+                    child: const Text(
                       'Checkout',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                 )
-              : SizedBox(),
+              : const SizedBox(),
         ],
       ),
     );

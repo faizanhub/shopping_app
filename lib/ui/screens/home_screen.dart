@@ -19,7 +19,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String categoryValue = AppStrings.all;
-  ShoppingServices _shoppingServices = ShoppingServices();
+  final ShoppingServices _shoppingServices = ShoppingServices();
 
   List<Product>? listOfAllProducts;
   List<String> listOfAllCategories = [];
@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${AppStrings.appTitle}'),
+        title: const Text(AppStrings.appTitle),
         centerTitle: true,
         actions: [
           Badge(
@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Navigator.pushNamed(context, CheckoutScreen.routeName,
                     arguments: [selectedItemsList, removeFromCart, resetCart]);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.shopping_cart_outlined,
               ),
             ),
@@ -119,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   listOfProducts: listOfAllProducts!,
                   addToCart: addToCart,
                 )
-              : Expanded(
+              : const Expanded(
                   child: Center(
                     child: CircularProgressIndicator(),
                   ),

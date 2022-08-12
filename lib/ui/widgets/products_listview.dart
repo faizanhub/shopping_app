@@ -44,6 +44,6 @@ class _ProductsListViewState extends State<ProductsListView> {
               },
             ),
           )
-        : Expanded(child: NoItemTile());
+        : const Expanded(child: NoItemTile());
   }
 }

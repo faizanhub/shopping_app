@@ -34,8 +34,8 @@ class ProductsTile extends StatelessWidget {
         trailing: IconButton(
           onPressed: onTrailingPress,
           icon: removeIcon
-              ? Icon(Icons.remove_shopping_cart_outlined)
-              : Icon(Icons.add_shopping_cart_outlined),
+              ? const Icon(Icons.remove_shopping_cart_outlined)
+              : const Icon(Icons.add_shopping_cart_outlined),
         ),
       ),
     );

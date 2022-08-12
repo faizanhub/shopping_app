@@ -7,7 +7,7 @@ abstract class MyRoutes {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case HomeScreen.routeName:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       case CheckoutScreen.routeName:
         final args = settings.arguments as List;
         return MaterialPageRoute(
@@ -18,7 +18,7 @@ abstract class MyRoutes {
                 ));
 
       default:
-        return MaterialPageRoute(builder: (_) => HomeScreen());
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
     }
   }
 }

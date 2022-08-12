@@ -20,7 +20,7 @@ class BillTile extends StatelessWidget {
     return Container(
       color: Theme.of(context).primaryColor,
       child: ListTile(
-        leading: Text(
+        leading: const Text(
           AppStrings.totalBill,
           style: categoryTextStyle,
         ),

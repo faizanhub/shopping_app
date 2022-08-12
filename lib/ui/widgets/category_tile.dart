@@ -18,7 +18,7 @@ class CategoryTile extends StatelessWidget {
     return Container(
       color: Theme.of(context).primaryColor,
       child: ListTile(
-        leading: Text(
+        leading: const Text(
           AppStrings.categories,
           style: categoryTextStyle,
         ),
@@ -33,15 +33,15 @@ class CategoryTile extends StatelessWidget {
           ),
           onChanged: onChanged,
           items: [
-            DropdownMenuItem(
-              child: Text(AppStrings.all),
+            const DropdownMenuItem(
               value: AppStrings.all,
+              child: Text(AppStrings.all),
             ),
             ...listOfCategories
                 .map(
                   (category) => DropdownMenuItem<String>(
-                    child: Text(category),
                     value: category,
+                    child: Text(category),
                   ),
                 )
                 .toList()
